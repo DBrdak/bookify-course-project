@@ -104,7 +104,7 @@ public sealed class Booking : Entity
     {
         if (Status != BookingStatus.Confirmed)
         {
-            return Result.Failure(BookingErrors.NotReserved);
+            return Result.Failure(BookingErrors.NotConfirmed);
         }
 
         Status = BookingStatus.Completed;
@@ -116,6 +116,28 @@ public sealed class Booking : Entity
     }
 
     public Result Cancel(DateTime utcNow)
+    {
+        if (Status != BookingStatus.Confirmed)
+        {
+            return Result.Failure(BookingErrors.NotConfirmed);
+        }
+
+        var currentDate = DateOnly.FromDateTime(utcNow);
+
+        if (currentDate > Duration.Start)
+        {
+            return Result.Failure(BookingErrors.AlreadyStarted);
+        }
+
+        Status = BookingStatus.Cancelled;
+        CancelledOnUtc = utcNow;
+
+        RaiseDomainEvent(new BookingCancelledDomainEvent(Id));
+
+        return Result.Success();
+    }
+
+    public Result Reject(DateTime utcNow)
     {
         if (Status != BookingStatus.Confirmed)
         {

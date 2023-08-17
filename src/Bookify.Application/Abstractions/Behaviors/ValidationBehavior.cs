@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bookify.Application.Abstractions.Messaging;
+using Bookify.Application.Exceptions;
 using FluentValidation;
 using MediatR;
+using ValidationException = Bookify.Application.Exceptions.ValidationException;
 
 namespace Bookify.Application.Abstractions.Behaviors
 {
@@ -14,7 +16,7 @@ namespace Bookify.Application.Abstractions.Behaviors
         : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IBaseCommand
     {
-        private readonly IEnumerable<IValidator<TRequest> _validators;
+        private readonly IEnumerable<IValidator<TRequest>> _validators;
 
         public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
         {
