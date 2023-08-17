@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Bookify.Domain.Abstractions;
+using Bookify.Domain.Shared;
 
 namespace Bookify.Domain.Apartments
 {
@@ -16,7 +17,7 @@ namespace Bookify.Domain.Apartments
         public Address Address { get; private set; }
         public Money Price { get; private set; }
         public Money CleaningFee { get; private set; }
-        public DateTime? LastBookedOnUtc { get; private set; }
+        public DateTime? LastBookedOnUtc { get; internal set; }
         public List<Amenity> Amenities { get; private set; } = new();
 
         public Apartment(Guid id,
