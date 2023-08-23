@@ -34,6 +34,10 @@ public sealed class Booking : Entity
 
     public DateTime? CancelledOnUtc { get; private set; }
 
+    private Booking()
+    {
+    }
+
     private Booking(
         Guid id,
         Guid apartmentId,

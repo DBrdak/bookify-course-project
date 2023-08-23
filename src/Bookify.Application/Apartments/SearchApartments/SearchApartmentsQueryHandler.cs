@@ -77,7 +77,7 @@ namespace Bookify.Application.Apartments.SearchApartments
                 },
                 splitOn: "Country");
 
-            return null;
+            return apartments.ToList();
         }
     }
 }

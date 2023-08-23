@@ -20,6 +20,9 @@ namespace Bookify.Domain.Apartments
         public DateTime? LastBookedOnUtc { get; internal set; }
         public List<Amenity> Amenities { get; private set; } = new();
 
+        private Apartment()
+        { }
+
         public Apartment(Guid id,
             Name name,
             Description description,

@@ -15,6 +15,10 @@ namespace Bookify.Domain.Users
         public Email Email { get; private set; }
         public string IdentityId { get; set; }
 
+        private User()
+        {
+        }
+
         private User(Guid id, FirstName firstName, LastName lastName, Email email) : base(id)
         {
             FirstName = firstName;
